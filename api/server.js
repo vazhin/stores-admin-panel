@@ -21,8 +21,16 @@ app.get('/', (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, async () => {
-  console.log(`Server is running on port ${PORT}.`);
-  await sequelize.authenticate();
-  console.log('Database Connected!');
-});
+app
+  .listen(PORT, async () => {
+    console.log(`
+     Server listening on port: ${PORT}
+   +--------------------------------+
+`);
+    await sequelize.authenticate();
+    console.log('Database Connected!');
+  })
+  .on('error', (err) => {
+    console.log(err);
+    process.exit(1);
+  });
