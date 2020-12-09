@@ -1,8 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const { sequelize } = require('./models');
 
 const app = express();
+
+async function syncSequelize() {
+  await sequelize.sync();
+}
+syncSequelize();
 
 var corsOptions = {
   origin: 'http://localhost:3000',
