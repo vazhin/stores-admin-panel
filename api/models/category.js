@@ -8,6 +8,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   Category.init(
     {
+      uuid: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
