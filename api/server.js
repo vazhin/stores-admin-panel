@@ -6,7 +6,7 @@ const { sequelize } = require('./models');
 const app = express();
 
 async function syncSequelize() {
-  await sequelize.sync();
+  await sequelize.sync({ force: true });
 }
 syncSequelize();
 
