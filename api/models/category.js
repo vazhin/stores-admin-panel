@@ -2,8 +2,9 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Category extends Model {
-    static associate({ Product }) {
+    static associate({ Product, Store }) {
       this.hasMany(Product, { foreignKey: 'categoryId' });
+      this.belongsTo(Store, { foreignKey: 'storeId' });
     }
 
     toJSON() {
@@ -28,6 +29,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
+      },
+      storeId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
       },
     },
     {
