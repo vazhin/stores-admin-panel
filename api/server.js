@@ -5,11 +5,6 @@ const { sequelize } = require('./models');
 
 const app = express();
 
-async function syncSequelize() {
-  await sequelize.sync({ force: true });
-}
-syncSequelize();
-
 var corsOptions = {
   origin: 'http://localhost:3000',
   optionsSuccessStatus: 200,
@@ -26,6 +21,8 @@ app.get('/', (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`Server is running on port ${PORT}.`);
+  await sequelize.authenticate();
+  console.log('Database Connected!');
 });
