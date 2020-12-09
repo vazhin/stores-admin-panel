@@ -2,8 +2,8 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
-    static associate(models) {
-      // define association here
+    static associate({ Category }) {
+      this.belongsTo(Category, { foreignKey: 'categoryId' });
     }
 
     toJSON() {
@@ -29,6 +29,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       quantity: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      categoryId: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
