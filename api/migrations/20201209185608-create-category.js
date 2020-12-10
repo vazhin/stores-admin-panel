@@ -23,6 +23,7 @@ module.exports = {
       numOfProducts: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        defaultValue: 0,
       },
       storeId: {
         type: Sequelize.INTEGER,
