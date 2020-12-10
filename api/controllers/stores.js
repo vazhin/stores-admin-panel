@@ -1,5 +1,4 @@
 const { Store } = require('../models');
-const { Op } = require('sequelize');
 
 exports.getStores = async (req, res, next) => {
   const pageNum = req.query.page ? req.query.page : 1;
