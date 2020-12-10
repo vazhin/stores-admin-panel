@@ -16,19 +16,35 @@ module.exports = (sequelize, DataTypes) => {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          notNull: { msg: 'A category must have a name' },
+          notEmpty: { msg: 'The name must not be empty' },
+        },
       },
       image: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          notNull: { msg: 'A category must have an image' },
+          notEmpty: { msg: 'The image must not be empty' },
+        },
       },
       numOfProducts: {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
+        validate: {
+          isInt: { msg: 'The numOfProducts must be an integer' },
+        },
       },
       storeId: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        validate: {
+          notNull: { msg: 'A category must have a storeId' },
+          notEmpty: { msg: 'The storeId must not be empty' },
+          isInt: { msg: 'The storeId must be an integer' },
+        },
       },
     },
     {
