@@ -64,6 +64,17 @@ class DatabaseService {
       }
     });
   }
+
+  async create(model, data) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const item = await model.create(data);
+        resolve(item);
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
 }
 
 module.exports = new DatabaseService();

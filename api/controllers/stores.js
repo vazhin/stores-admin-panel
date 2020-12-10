@@ -2,10 +2,11 @@ const { Store, Category } = require('../models');
 const dbService = require('../services/db');
 
 exports.createStore = async (req, res, next) => {
-  const { name, logo } = req.body;
+  const { name } = req.body;
+  const logo = req.file ? req.file.path : '';
   try {
-    //
-    res.status(200).json();
+    const store = await dbService.create(Store, { name, logo });
+    res.status(200).json(store);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
