@@ -1,6 +1,16 @@
 const { Category, Product } = require('../models');
 const dbService = require('../services/db');
 
+exports.createCategory = async (req, res, next) => {
+  try {
+    //
+    res.status(200).json();
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+};
+
 exports.getProductsInCategory = async (req, res, next) => {
   const pageNum = req.query.page ? req.query.page : 1;
   const categoryId = req.params.categoryId;

@@ -1,6 +1,16 @@
 const { Store, Category } = require('../models');
 const dbService = require('../services/db');
 
+exports.createStore = async (req, res, next) => {
+  try {
+    //
+    res.status(200).json();
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+};
+
 exports.getStores = async (req, res, next) => {
   const pageNum = req.query.page ? req.query.page : 1;
   try {
@@ -23,16 +33,6 @@ exports.getCategoriesInStore = async (req, res, next) => {
       parseInt(pageNum)
     );
     res.status(200).json(categories);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-};
-
-exports.createStore = async (req, res, next) => {
-  try {
-    //
-    res.status(200).json();
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
