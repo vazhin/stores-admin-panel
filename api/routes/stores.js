@@ -1,7 +1,12 @@
 const express = require('express');
-const { getStores, getCategoriesInStore } = require('../controllers/stores');
+const {
+  createStore,
+  getStores,
+  getCategoriesInStore,
+} = require('../controllers/stores');
 const router = express.Router();
 
+router.post('/', createStore);
 router.get('/', getStores);
 router.get('/:storeId', getCategoriesInStore);
 

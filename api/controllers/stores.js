@@ -28,3 +28,13 @@ exports.getCategoriesInStore = async (req, res, next) => {
     res.status(500).json(err);
   }
 };
+
+exports.createStore = async (req, res, next) => {
+  try {
+    //
+    res.status(200).json();
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+};
