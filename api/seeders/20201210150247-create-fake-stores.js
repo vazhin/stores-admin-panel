@@ -5,8 +5,8 @@ function createRecords() {
   for (let i = 0; i < 8; i++) {
     records.push({
       uuid: i + '67b680a-3655-40e0-a3c9-a6722b5a1c1d',
-      name: 'Product Name',
-      logo: 'uploads/products/1605641021210-156853.jpg',
+      name: 'Store Name',
+      logo: 'uploads/stores/1605641021210-156853.jpg',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
