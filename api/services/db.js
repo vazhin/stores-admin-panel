@@ -53,6 +53,17 @@ class DatabaseService {
       }
     });
   }
+
+  async getById(uuid, model) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const product = await model.findOne({ where: { uuid } });
+        resolve(product);
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
 }
 
 module.exports = new DatabaseService();
