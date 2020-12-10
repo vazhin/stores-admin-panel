@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const logger = require('morgan');
 const { sequelize } = require('./models');
 const { storesRouter, productsRouter, categoriesRouter } = require('./routes');
 
@@ -15,6 +16,7 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(logger('dev'));
 app.use(
   '/uploads/stores',
   express.static(path.join(__dirname, '/uploads/stores'))
