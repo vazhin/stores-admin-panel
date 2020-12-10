@@ -12,7 +12,7 @@ exports.getStores = async (req, res, next) => {
   }
 };
 
-exports.getStoreCategories = async (req, res, next) => {
+exports.getCategoriesInStore = async (req, res, next) => {
   const pageNum = req.query.page ? req.query.page : 1;
   const storeId = req.params.storeId;
   try {
