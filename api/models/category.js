@@ -6,10 +6,6 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(Product, { foreignKey: 'categoryId' });
       this.belongsTo(Store, { foreignKey: 'storeId', as: 'store' });
     }
-
-    toJSON() {
-      return { ...this.get(), id: undefined };
-    }
   }
   Category.init(
     {
