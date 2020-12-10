@@ -1,21 +1,13 @@
 const { Store } = require('../models');
+const dbService = require('../services/db');
 
 exports.getStores = async (req, res, next) => {
   const pageNum = req.query.page ? req.query.page : 1;
-  const limit = 8;
   try {
-    const result = await Store.findAndCountAll({
-      offset: (pageNum - 1) * limit,
-      limit,
-      order: [['createdAt', 'DESC']],
-    });
-
-    const stores = result.rows;
-    const numOfStores = result.count;
-    const numOfPages = Math.ceil(numOfStores / limit);
-
-    res.status(200).json({ stores, numOfStores, numOfPages });
+    const stores = await dbService.getAll(Store, parseInt(pageNum));
+    res.status(200).json(stores);
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 };
