@@ -2,6 +2,7 @@ const { Product } = require('../models');
 const dbService = require('../services/db');
 
 exports.createProduct = async (req, res, next) => {
+  const { name, image, price, quantity, categoryId } = req.body;
   try {
     //
     res.status(200).json();

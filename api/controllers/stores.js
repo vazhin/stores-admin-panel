@@ -2,6 +2,7 @@ const { Store, Category } = require('../models');
 const dbService = require('../services/db');
 
 exports.createStore = async (req, res, next) => {
+  const { name, logo } = req.body;
   try {
     //
     res.status(200).json();

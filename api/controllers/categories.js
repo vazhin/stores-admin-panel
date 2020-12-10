@@ -2,6 +2,7 @@ const { Category, Product } = require('../models');
 const dbService = require('../services/db');
 
 exports.createCategory = async (req, res, next) => {
+  const { name, image, storeId } = req.body;
   try {
     //
     res.status(200).json();
