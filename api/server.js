@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -14,7 +15,18 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('uploads'));
+app.use(
+  '/uploads/stores',
+  express.static(path.join(__dirname, '/uploads/stores'))
+);
+app.use(
+  '/uploads/categories',
+  express.static(path.join(__dirname, '/uploads/categories'))
+);
+app.use(
+  '/uploads/products',
+  express.static(path.join(__dirname, '/uploads/products'))
+);
 
 // app.use('/', storesRouter);
 app.use('/stores', storesRouter);
