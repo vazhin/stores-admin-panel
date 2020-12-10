@@ -14,6 +14,7 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('uploads'));
 
 // app.use('/', storesRouter);
 app.use('/stores', storesRouter);
