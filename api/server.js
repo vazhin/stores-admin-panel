@@ -2,12 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { sequelize } = require('./models');
-const {
-  indexRouter,
-  storesRouter,
-  productsRouter,
-  categoriesRouter,
-} = require('./routes');
+const { storesRouter, productsRouter, categoriesRouter } = require('./routes');
 
 const app = express();
 
@@ -20,7 +15,7 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/', indexRouter);
+// app.use('/', storesRouter);
 app.use('/stores', storesRouter);
 app.use('/products', productsRouter);
 app.use('/categories', categoriesRouter);
