@@ -29,6 +29,10 @@ class DatabaseService {
           where: { uuid: foreignKey.value },
         });
 
+        if (!parent) {
+          resolve({ items: [], itemCount: 0, pageNum, pageCount: 0 });
+        }
+
         const criteria = {};
         criteria[foreignKey.field] = parent.id;
 
