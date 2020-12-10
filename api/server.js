@@ -2,6 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { sequelize } = require('./models');
+// TODO: refactor this
+const indexRouter = require('./routes');
+const storesRouter = require('./routes/stores');
+const productsRouter = require('./routes/products');
+const categoriesRouter = require('./routes/categories');
 
 const app = express();
 
@@ -16,9 +21,10 @@ app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-  res.json({ message: 'The server is running!' });
-});
+app.use('/', indexRouter);
+app.use('/stores', storesRouter);
+app.use('/products', productsRouter);
+app.use('/categories', categoriesRouter);
 
 const PORT = process.env.PORT || 5000;
 app
