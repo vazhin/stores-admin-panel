@@ -9,7 +9,7 @@ function createRecords() {
       image: 'uploads/products/1605641021210-156853.jpg',
       price: 35000,
       quantity: i,
-      categoryId: 8,
+      categoryId: 3,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
