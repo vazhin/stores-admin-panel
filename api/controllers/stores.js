@@ -24,6 +24,18 @@ exports.getStores = async (req, res, next) => {
   }
 };
 
+exports.editStore = async (req, res, next) => {
+  const { name } = req.body;
+  const storeId = req.params.storeId;
+  try {
+    const store = await db.edit(Store, storeId, [{ key: 'name', value: name }]);
+    res.status(200).json(store);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+};
+
 exports.getCategoriesInStore = async (req, res, next) => {
   const pageNum = req.query.page ? req.query.page : 1;
   const storeId = req.params.storeId;

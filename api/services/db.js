@@ -57,8 +57,8 @@ class DatabaseService {
   async getById(uuid, model) {
     return new Promise(async (resolve, reject) => {
       try {
-        const product = await model.findOne({ where: { uuid } });
-        resolve(product);
+        const item = await model.findOne({ where: { uuid } });
+        resolve(item);
       } catch (err) {
         reject(err);
       }
@@ -69,6 +69,22 @@ class DatabaseService {
     return new Promise(async (resolve, reject) => {
       try {
         const item = await model.create(data);
+        resolve(item);
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+
+  async edit(model, uuid, newData) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const item = await model.findOne({ where: { uuid } });
+        newData.forEach((field) => {
+          item[field.key] = field.value;
+        });
+        await item.save();
+
         resolve(item);
       } catch (err) {
         reject(err);

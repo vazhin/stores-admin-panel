@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const {
-  createStore,
+  editStore,
   getStores,
+  createStore,
   getCategoriesInStore,
 } = require('../controllers/stores');
 
@@ -21,5 +22,6 @@ const upload = multer({ storage: storage });
 router.post('/', upload.single('logo'), createStore);
 router.get('/', getStores);
 router.get('/:storeId', getCategoriesInStore);
+router.put('/:storeId', editStore);
 
 module.exports = router;
