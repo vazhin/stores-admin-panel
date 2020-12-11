@@ -29,3 +29,19 @@ exports.getProduct = async (req, res, next) => {
     res.status(500).json(err);
   }
 };
+
+exports.editProduct = async (req, res, next) => {
+  const { name, price, quantity } = req.body;
+  const productId = req.params.productId;
+  try {
+    const product = await db.edit(Product, productId, [
+      { key: 'name', value: name },
+      { key: 'price', value: price },
+      { key: 'quantity', value: quantity },
+    ]);
+    res.status(200).json(product);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+};
