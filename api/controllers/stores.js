@@ -1,11 +1,11 @@
 const { Store, Category } = require('../models');
-const dbService = require('../services/db');
+const db = require('../services/db');
 
 exports.createStore = async (req, res, next) => {
   const { name } = req.body;
   const logo = req.file ? req.file.path : '';
   try {
-    const store = await dbService.create(Store, { name, logo });
+    const store = await db.create(Store, { name, logo });
     res.status(200).json(store);
   } catch (err) {
     console.log(err);
@@ -16,7 +16,7 @@ exports.createStore = async (req, res, next) => {
 exports.getStores = async (req, res, next) => {
   const pageNum = req.query.page ? req.query.page : 1;
   try {
-    const stores = await dbService.getAll(Store, parseInt(pageNum));
+    const stores = await db.getAll(Store, parseInt(pageNum));
     res.status(200).json(stores);
   } catch (err) {
     console.log(err);
@@ -28,7 +28,7 @@ exports.getCategoriesInStore = async (req, res, next) => {
   const pageNum = req.query.page ? req.query.page : 1;
   const storeId = req.params.storeId;
   try {
-    const categories = await dbService.getAllById(
+    const categories = await db.getAllById(
       Category,
       Store,
       { field: 'storeId', value: storeId },

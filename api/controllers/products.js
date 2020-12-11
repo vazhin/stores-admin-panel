@@ -1,11 +1,11 @@
 const { Product } = require('../models');
-const dbService = require('../services/db');
+const db = require('../services/db');
 
 exports.createProduct = async (req, res, next) => {
   const { name, price, quantity, categoryId } = req.body;
   const image = req.file ? req.file.path : '';
   try {
-    const product = await dbService.create(Product, {
+    const product = await db.create(Product, {
       name,
       image,
       price: parseInt(price),
@@ -22,7 +22,7 @@ exports.createProduct = async (req, res, next) => {
 exports.getProduct = async (req, res, next) => {
   const productId = req.params.productId;
   try {
-    const product = await dbService.getById(productId, Product);
+    const product = await db.getById(productId, Product);
     res.status(200).json(product);
   } catch (err) {
     console.log(err);
