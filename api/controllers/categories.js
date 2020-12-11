@@ -17,6 +17,20 @@ exports.createCategory = async (req, res, next) => {
   }
 };
 
+exports.editCategory = async (req, res, next) => {
+  const { name } = req.body;
+  const categoryId = req.params.categoryId;
+  try {
+    const category = await db.edit(Category, categoryId, [
+      { key: 'name', value: name },
+    ]);
+    res.status(200).json(category);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+};
+
 exports.getProductsInCategory = async (req, res, next) => {
   const pageNum = req.query.page ? req.query.page : 1;
   const categoryId = req.params.categoryId;
