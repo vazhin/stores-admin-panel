@@ -30,10 +30,9 @@ app.use(
   express.static(path.join(__dirname, '/uploads/products'))
 );
 
-// app.use('/', storesRouter);
-app.use('/stores', storesRouter);
-app.use('/products', productsRouter);
-app.use('/categories', categoriesRouter);
+app.use('/api/stores', storesRouter);
+app.use('/api/products', productsRouter);
+app.use('/api/categories', categoriesRouter);
 
 const PORT = process.env.PORT || 5000;
 app
