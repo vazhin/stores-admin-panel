@@ -1,15 +1,8 @@
-import React, { useState } from 'react';
-import DataTable from './components/table';
+import React from 'react';
+import Main from './components/main';
 
 function App() {
-  const [state, setState] = useState(0);
-  return (
-    <div className="App">
-      <h1>{state}</h1>
-      <button onClick={() => setState(state + 1)}>increment</button>
-      <DataTable />
-    </div>
-  );
+  return <Main />;
 }
 
 export default App;
