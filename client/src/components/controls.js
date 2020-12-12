@@ -42,7 +42,7 @@ const TableControls = ({ table }) => {
         show={modalShow}
         onHide={() => setModalShow(false)}
         table={table}
-        mode={'create'}
+        mode={'add'}
       />
     </ButtonToolbar>
   );
