@@ -5,7 +5,7 @@ class DataService {
     return http.get(`/${items}`);
   }
 
-  get(id, items) {
+  getById(id, items) {
     return http.get(`/${items}/${id}`);
   }
 
