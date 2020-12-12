@@ -7,10 +7,12 @@ import db from '../services/dataService';
 import { setData } from '../redux/actions';
 import EditButtons from './editButtons';
 import ImageInTable from './imageInTable';
+import CreateItemModal from './modal';
 
 const StoreTable = () => {
   const fields = ['name', 'logo', 'numOfCategories'];
-  const [modalShow, setModalShow] = useState(false);
+  const [createModalShow, setCreateModalShow] = useState(false);
+  const [imageModalShow, setImageModalShow] = useState(false);
   const [image, setImage] = useState('');
   const data = useSelector((state) => state.data);
   const dispatch = useDispatch();
@@ -76,7 +78,7 @@ const StoreTable = () => {
                               item={item}
                               field={field}
                               setImage={setImage}
-                              setModalShow={setModalShow}
+                              setModalShow={setImageModalShow}
                             />
                           </td>
                         );
@@ -85,7 +87,7 @@ const StoreTable = () => {
                       }
                     })}
                     <td className="d-flex justify-content-center align-items-center">
-                      <EditButtons />
+                      <EditButtons setModalShow={setCreateModalShow} />
                     </td>
                   </tr>
                 );
@@ -93,9 +95,16 @@ const StoreTable = () => {
             </tbody>
           </Table>
           <ImageModal
-            show={modalShow}
-            onHide={() => setModalShow(false)}
+            show={imageModalShow}
+            onHide={() => setImageModalShow(false)}
             image={image}
+          />
+
+          <CreateItemModal
+            show={createModalShow}
+            onHide={() => setCreateModalShow(false)}
+            table={'stores'}
+            mode={'edit'}
           />
         </>
       )}

@@ -2,6 +2,9 @@ import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
 function CreateItemModal(props) {
+  console.log(props.table);
+  console.log(props.mode);
+
   return (
     <Modal
       {...props}

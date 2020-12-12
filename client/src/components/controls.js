@@ -39,7 +39,12 @@ const TableControls = ({ table }) => {
         + Add Item
       </Button>
 
-      <CreateItemModal show={modalShow} onHide={() => setModalShow(false)} />
+      <CreateItemModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        table={table}
+        mode={'create'}
+      />
     </ButtonToolbar>
   );
 };
