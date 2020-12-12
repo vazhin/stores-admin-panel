@@ -18,6 +18,8 @@ An admin panel that allows its user to create a list of clothes shopping stores 
 
 `yarn start`
 
+<img src="./screencapture-localhost-3000-stores-2020-12-12-22_23_58.png" alt="screencapture" />
+
 | Methods | Urls               | Actions                               | Done |
 | ------- | ------------------ | ------------------------------------- | ---- |
 | GET     | api/stores         | get all stores                        | Yes  |
