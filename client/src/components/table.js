@@ -34,7 +34,12 @@ const DataTable = ({ table }) => {
   }
 
   useEffect(() => {
-    if (table === 'stores') retrieveItems();
+    if (table === 'stores') {
+      retrieveItems();
+    } else {
+      history.push('/stores');
+      history.go(0);
+    }
     // eslint-disable-next-line
   }, []);
 
