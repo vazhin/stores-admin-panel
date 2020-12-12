@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Switch, Route } from 'react-router-dom';
 import StoreTable from './storeTable';
@@ -8,32 +7,8 @@ import ProductTable from './productTable';
 import TableControls from './controls';
 import TableBreadCrumb from './breadcrumb';
 import TablePagination from './pagination';
-import db from '../services/dataService';
-import { setData } from '../redux/actions';
 
 const Main = () => {
-  const data = useSelector((state) => state.data);
-  const dispatch = useDispatch();
-
-  console.log(data);
-
-  useEffect(() => {
-    retrieveItems('stores');
-    // eslint-disable-next-line
-  }, []);
-
-  const retrieveItems = async (typeOfItems) => {
-    try {
-      const response = await db.getAll(
-        typeOfItems,
-        data.pageNum ? data.pageNum : 1
-      );
-      dispatch(setData(response.data));
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   return (
     <main
       className="d-flex justify-content-center align-items-center px-lg-5 px-0"

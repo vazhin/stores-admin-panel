@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Table, Image } from 'react-bootstrap';
 import ImageModal from './imageModal';
@@ -6,12 +6,28 @@ import db from '../services/dataService';
 import { setData } from '../redux/actions';
 
 const StoreTable = () => {
+  const fields = ['name', 'logo'];
   const [modalShow, setModalShow] = useState(false);
   const [image, setImage] = useState('');
   const data = useSelector((state) => state.data);
   const dispatch = useDispatch();
 
-  const fields = ['name', 'logo'];
+  useEffect(() => {
+    retrieveItems();
+    // eslint-disable-next-line
+  }, []);
+
+  const retrieveItems = async () => {
+    try {
+      const response = await db.getAll(
+        'stores',
+        data.pageNum ? data.pageNum : 1
+      );
+      dispatch(setData(response.data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>

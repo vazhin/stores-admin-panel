@@ -4,11 +4,30 @@ import { Breadcrumb } from 'react-bootstrap';
 const TableBreadCrumb = ({ table }) => {
   return (
     <Breadcrumb>
-      <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
-      <Breadcrumb.Item href="https://getbootstrap.com/docs/4.0/components/breadcrumb/">
-        Library
-      </Breadcrumb.Item>
-      <Breadcrumb.Item active>Data</Breadcrumb.Item>
+      {table === 'stores' && (
+        <Breadcrumb.Item active href="/stores">
+          Stores
+        </Breadcrumb.Item>
+      )}
+
+      {table === 'categories' && (
+        <>
+          <Breadcrumb.Item href="/stores">Stores</Breadcrumb.Item>
+          <Breadcrumb.Item active href="/categories">
+            Categories
+          </Breadcrumb.Item>
+        </>
+      )}
+
+      {table === 'products' && (
+        <>
+          <Breadcrumb.Item href="/stores">Stores</Breadcrumb.Item>
+          <Breadcrumb.Item href="/categories">Categories</Breadcrumb.Item>
+          <Breadcrumb.Item active href="/products">
+            Products
+          </Breadcrumb.Item>
+        </>
+      )}
     </Breadcrumb>
   );
 };
