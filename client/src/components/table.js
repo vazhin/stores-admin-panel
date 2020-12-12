@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Table, Image } from 'react-bootstrap';
 import ImageModal from './imageModal';
+import db from '../services/dataService';
+import { setItems } from '../redux/actions/actions';
 
 const DataTable = () => {
   const [modalShow, setModalShow] = useState(false);
@@ -9,6 +11,7 @@ const DataTable = () => {
   const [fields, setFields] = useState(null);
   const items = useSelector((state) => state.items);
   const typeOfItems = useSelector((state) => state.typeOfItems);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     switch (typeOfItems) {
@@ -48,7 +51,13 @@ const DataTable = () => {
           <tbody>
             {items.map((item) => {
               return (
-                <tr>
+                <tr
+                  key={item.uuid}
+                  onClick={async () => {
+                    const response = await db.getById(item.uuid, typeOfItems);
+                    dispatch(setItems(response.data.items));
+                  }}
+                >
                   {fields.map((field) => {
                     if (['logo', 'image'].includes(field)) {
                       return (
