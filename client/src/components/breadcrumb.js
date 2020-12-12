@@ -1,7 +1,10 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Breadcrumb } from 'react-bootstrap';
 
 const TableBreadCrumb = ({ table }) => {
+  let history = useHistory();
+
   return (
     <Breadcrumb>
       {table === 'stores' && (
@@ -12,7 +15,10 @@ const TableBreadCrumb = ({ table }) => {
 
       {table === 'categories' && (
         <>
-          <Breadcrumb.Item active href="/stores">
+          <Breadcrumb.Item
+            href="/stores"
+            onClick={() => history.push('/stores')}
+          >
             Stores
           </Breadcrumb.Item>
           <Breadcrumb.Item active href="/categories">
@@ -23,7 +29,10 @@ const TableBreadCrumb = ({ table }) => {
 
       {table === 'products' && (
         <>
-          <Breadcrumb.Item active href="/stores">
+          <Breadcrumb.Item
+            href="/stores"
+            onClick={() => history.push('/stores')}
+          >
             Stores
           </Breadcrumb.Item>
           <Breadcrumb.Item active href="/categories">
