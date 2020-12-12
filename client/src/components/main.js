@@ -10,6 +10,7 @@ import { setItems } from '../redux/actions/actions';
 
 const Main = () => {
   const typeOfItems = useSelector((state) => state.typeOfItems);
+  const currentPage = useSelector((state) => state.currentPage);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,7 +22,7 @@ const Main = () => {
 
   const retrieveItems = async (typeOfItems) => {
     try {
-      const response = await db.getAll(typeOfItems);
+      const response = await db.getAll(typeOfItems, currentPage);
       dispatch(setItems(response.data.items));
     } catch (err) {
       console.log(err);

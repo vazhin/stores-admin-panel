@@ -1,11 +1,11 @@
 import http from '../http-common';
 
 class DataService {
-  getAll(items) {
-    return http.get(`/${items}`);
+  getAll(items, page) {
+    return http.get(`/${items}${page ? `?page=${page}` : ''}`);
   }
 
-  getById(id, items) {
+  getById(id, items, page) {
     return http.get(`/${items}/${id}`);
   }
 
