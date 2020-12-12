@@ -113,7 +113,9 @@ const CreateItemForm = ({ table, mode, itemClicked }) => {
             )
           )}
 
-          <Button type="submit">Add Item</Button>
+          <Button type="submit">
+            {mode.charAt(0).toUpperCase() + mode.slice(1)} Item
+          </Button>
         </Form>
       )}
     </>
