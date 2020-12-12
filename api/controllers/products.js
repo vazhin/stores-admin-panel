@@ -1,10 +1,11 @@
-const { Product } = require('../models');
+const { Product, Category } = require('../models');
 const db = require('../services/db');
 
 exports.createProduct = async (req, res, next) => {
   const { name, price, quantity, categoryId } = req.body;
   const image = req.file ? req.file.path : '';
   try {
+    await db.increaseCounter(Category, categoryId, 'categories');
     const product = await db.create(Product, {
       name,
       image,

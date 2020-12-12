@@ -5,13 +5,13 @@ exports.createCategory = async (req, res, next) => {
   const { name, storeId } = req.body;
   const image = req.file ? req.file.path : '';
   try {
-    const store = await db.increaseCounter(Store, storeId, 'stores');
+    await db.increaseCounter(Store, storeId, 'stores');
     const category = await db.create(Category, {
       name,
       image,
       storeId: parseInt(storeId),
     });
-    res.status(200).json({ category, store });
+    res.status(200).json(category);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
