@@ -69,7 +69,13 @@ const DataTable = ({ table }) => {
     <>
       {data.items && (
         <>
-          <Table striped bordered hover className="bg-white">
+          <Table
+            striped
+            bordered
+            hover
+            className="bg-white"
+            style={{ fontSize: '1.1rem' }}
+          >
             <thead>
               <tr>
                 {fields.map((field, i) =>
