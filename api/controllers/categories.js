@@ -1,16 +1,17 @@
-const { Category, Product } = require('../models');
+const { Category, Product, Store } = require('../models');
 const db = require('../services/db');
 
 exports.createCategory = async (req, res, next) => {
   const { name, storeId } = req.body;
   const image = req.file ? req.file.path : '';
   try {
+    const store = await db.increaseCounter(Store, storeId, 'stores');
     const category = await db.create(Category, {
       name,
       image,
       storeId: parseInt(storeId),
     });
-    res.status(200).json(category);
+    res.status(200).json({ category, store });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

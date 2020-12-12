@@ -76,6 +76,21 @@ class DatabaseService {
     });
   }
 
+  async increaseCounter(model, id, table) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const item = await model.findOne({ where: { id } });
+        if (table === 'stores') item.numOfCategories = item.numOfCategories + 1;
+        if (table === 'categories') item.numOfProducts = item.numOfProducts + 1;
+        await item.save();
+
+        resolve(item);
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+
   async edit(model, uuid, newData) {
     return new Promise(async (resolve, reject) => {
       try {
