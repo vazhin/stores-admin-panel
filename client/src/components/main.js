@@ -1,9 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Switch, Route } from 'react-router-dom';
-import StoreTable from './storeTable';
-import CategoryTable from './categoryTable';
-import ProductTable from './productTable';
+import DataTable from './table';
 import TableControls from './controls';
 import TableBreadCrumb from './breadcrumb';
 import TablePagination from './pagination';
@@ -21,21 +19,21 @@ const Main = () => {
               <Route path="/categories">
                 <TableBreadCrumb table={'categories'} />
                 <TableControls table={'categories'} />
-                <CategoryTable />
+                <DataTable table={'categories'} />
                 <TablePagination table={'categories'} />
               </Route>
 
               <Route path="/products">
                 <TableBreadCrumb table={'products'} />
                 <TableControls table={'products'} />
-                <ProductTable />
+                <DataTable table={'products'} />
                 <TablePagination table={'products'} />
               </Route>
 
               <Route path="/">
                 <TableBreadCrumb table={'stores'} />
                 <TableControls table={'stores'} />
-                <StoreTable />
+                <DataTable table={'stores'} />
                 <TablePagination table={'stores'} />
               </Route>
             </Switch>

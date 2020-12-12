@@ -6,11 +6,10 @@ import ImageModal from './imageModal';
 import db from '../services/dataService';
 import { setData } from '../redux/actions';
 import EditButtons from './editButtons';
-import ImageInTable from './imageInTable';
+import ImageInTable from './image';
 import CreateItemModal from './modal';
 
-const StoreTable = () => {
-  const fields = ['name', 'logo', 'numOfCategories'];
+const DataTable = ({ table }) => {
   const [createModalShow, setCreateModalShow] = useState(false);
   const [imageModalShow, setImageModalShow] = useState(false);
   const [image, setImage] = useState('');
@@ -18,17 +17,30 @@ const StoreTable = () => {
   const dispatch = useDispatch();
   let history = useHistory();
 
+  const fields = [];
+
+  switch (table) {
+    case 'stores':
+      fields.push('name', 'numOfCategories', 'logo');
+      break;
+    case 'categories':
+      fields.push('name', 'numOfProducts', 'image');
+      break;
+    case 'products':
+      fields.push('name', 'price', 'quantity', 'image');
+      break;
+    default:
+      break;
+  }
+
   useEffect(() => {
-    retrieveItems();
+    if (table === 'stores') retrieveItems();
     // eslint-disable-next-line
   }, []);
 
   const retrieveItems = async () => {
     try {
-      const response = await db.getAll(
-        'stores',
-        data.pageNum ? data.pageNum : 1
-      );
+      const response = await db.getAll(table, data.pageNum ? data.pageNum : 1);
       dispatch(setData(response.data));
     } catch (err) {
       console.log(err);
@@ -37,8 +49,12 @@ const StoreTable = () => {
 
   if (data.items && data.items.length === 0) {
     return (
-      <div>
-        <h2>No Stores Yet!</h2>
+      <div
+        className="d-flex flex-column justify-content-center"
+        style={{ height: '400px' }}
+      >
+        <h2>No {table.charAt(0).toUpperCase() + table.slice(1)} Yet!</h2>
+        <h2>Try adding one.</h2>
       </div>
     );
   }
@@ -51,8 +67,10 @@ const StoreTable = () => {
             <thead>
               <tr>
                 {fields.map((field, i) =>
-                  field === 'numOfCategories' ? (
-                    <th key={i}>CATEGORIES</th>
+                  field === 'numOfCategories' || field === 'numOfProducts' ? (
+                    <th key={i}>
+                      {field.slice(5, field.length).toUpperCase()}
+                    </th>
                   ) : (
                     <th key={i}>{field.toUpperCase()}</th>
                   )
@@ -65,9 +83,14 @@ const StoreTable = () => {
                   <tr
                     key={item.uuid}
                     onClick={async () => {
-                      const response = await db.getById(item.uuid, 'stores');
+                      if (table === 'products') return;
+
+                      const response = await db.getById(item.uuid, table);
                       dispatch(setData(response.data));
-                      history.push('/categories');
+                      if (table === 'stores')
+                        history.push(`/categories/${item.uuid}`);
+                      if (table === 'categories')
+                        history.push(`/products/${item.uuid}`);
                     }}
                   >
                     {fields.map((field, i) => {
@@ -103,7 +126,7 @@ const StoreTable = () => {
           <CreateItemModal
             show={createModalShow}
             onHide={() => setCreateModalShow(false)}
-            table={'stores'}
+            table={table}
             mode={'edit'}
           />
         </>
@@ -112,4 +135,4 @@ const StoreTable = () => {
   );
 };
 
-export default StoreTable;
+export default DataTable;
