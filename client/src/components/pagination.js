@@ -1,32 +1,44 @@
 import React from 'react';
 import { ButtonToolbar, Pagination } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { setData } from '../redux/actions';
+import { useSelector } from 'react-redux';
 
 const TablePagination = ({ table }) => {
   const data = useSelector((state) => state.data);
 
   return (
-    <ButtonToolbar
-      className="justify-content-between align-items-center mt-3"
-      aria-label="Toolbar with Button groups"
-    >
-      <p>Showing 8 of {data.pageNum}</p>
+    <>
+      {data.items && (
+        <ButtonToolbar
+          className="align-items-center mt-3"
+          aria-label="Toolbar with Button groups"
+        >
+          <h6 className="mr-4">
+            Page {data.pageNum} of {data.pageCount}
+          </h6>
+          <Pagination>
+            {data.pageNum >= 4 && (
+              <>
+                <Pagination.Item>{1}</Pagination.Item>
+                <Pagination.Ellipsis disabled />
+              </>
+            )}
 
-      <Pagination>
-        <Pagination.Prev />
-        <Pagination.Item>{1}</Pagination.Item>
-        <Pagination.Ellipsis disabled />
+            {data.pageNum !== 1 && (
+              <Pagination.Item>{data.pageNum - 1}</Pagination.Item>
+            )}
+            <Pagination.Item active>{data.pageNum}</Pagination.Item>
+            {data.pageCount > data.pageNum && (
+              <Pagination.Item>{data.pageNum + 1}</Pagination.Item>
+            )}
 
-        <Pagination.Item>{11}</Pagination.Item>
-        <Pagination.Item active>{12}</Pagination.Item>
-        <Pagination.Item>{13}</Pagination.Item>
-
-        <Pagination.Ellipsis disabled />
-        <Pagination.Item>{20}</Pagination.Item>
-        <Pagination.Next />
-      </Pagination>
-    </ButtonToolbar>
+            {data.pageNum + 2 !== data.pageCount && (
+              <Pagination.Ellipsis disabled />
+            )}
+            <Pagination.Item>{data.pageCount}</Pagination.Item>
+          </Pagination>
+        </ButtonToolbar>
+      )}
+    </>
   );
 };
 
