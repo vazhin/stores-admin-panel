@@ -1,13 +1,8 @@
 import { createStore } from 'redux';
-import { reducer } from './reducers/reducer';
+import { reducer } from './reducers';
 
 const state = {
   data: {},
-  // typeOfItems: 'stores',
-  // currentPage: 1,
-  // pageCount: 1,
-  // itemCount: 0,
-  // currentItemCount: 0,
 };
 
 const store = createStore(

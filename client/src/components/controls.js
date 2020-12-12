@@ -7,7 +7,7 @@ import {
   FormControl,
 } from 'react-bootstrap';
 
-const TableControls = () => {
+const TableControls = ({ table }) => {
   return (
     <ButtonToolbar
       className="justify-content-between mb-3"

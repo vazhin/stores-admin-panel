@@ -1,7 +1,7 @@
 import React from 'react';
 import { Breadcrumb } from 'react-bootstrap';
 
-const TableBreadCrumb = () => {
+const TableBreadCrumb = ({ table }) => {
   return (
     <Breadcrumb>
       <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
