@@ -26,9 +26,13 @@ exports.getStores = async (req, res, next) => {
 
 exports.editStore = async (req, res, next) => {
   const { name } = req.body;
+  const logo = req.file ? req.file.path : '';
   const storeId = req.params.storeId;
   try {
-    const store = await db.edit(Store, storeId, [{ key: 'name', value: name }]);
+    const store = await db.edit(Store, storeId, [
+      { key: 'name', value: name },
+      { key: 'logo', value: logo },
+    ]);
     res.status(200).json(store);
   } catch (err) {
     console.log(err);

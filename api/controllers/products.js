@@ -33,12 +33,14 @@ exports.getProduct = async (req, res, next) => {
 
 exports.editProduct = async (req, res, next) => {
   const { name, price, quantity } = req.body;
+  const image = req.file ? req.file.path : '';
   const productId = req.params.productId;
   try {
     const product = await db.edit(Product, productId, [
       { key: 'name', value: name },
       { key: 'price', value: price },
       { key: 'quantity', value: quantity },
+      { key: 'image', value: image },
     ]);
     res.status(200).json(product);
   } catch (err) {
