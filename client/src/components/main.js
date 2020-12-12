@@ -6,24 +6,24 @@ import TableControls from './controls';
 import TableBreadCrumb from './breadcrumb';
 import TablePagination from './pagination';
 import db from '../services/dataService';
-import { setItems } from '../redux/actions/actions';
+import { setData } from '../redux/actions/actions';
 
 const Main = () => {
-  const typeOfItems = useSelector((state) => state.typeOfItems);
-  const currentPage = useSelector((state) => state.currentPage);
+  const data = useSelector((state) => state.data);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (typeOfItems === 'stores') {
-      retrieveItems(typeOfItems);
-    }
+    retrieveItems('stores');
     // eslint-disable-next-line
   }, []);
 
   const retrieveItems = async (typeOfItems) => {
     try {
-      const response = await db.getAll(typeOfItems, currentPage);
-      dispatch(setItems(response.data.items));
+      const response = await db.getAll(
+        typeOfItems,
+        data.pageNum ? data.pageNum : 1
+      );
+      dispatch(setData(response.data));
     } catch (err) {
       console.log(err);
     }

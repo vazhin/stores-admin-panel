@@ -3,18 +3,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Table, Image } from 'react-bootstrap';
 import ImageModal from './imageModal';
 import db from '../services/dataService';
-import { setItems } from '../redux/actions/actions';
+import { setData } from '../redux/actions/actions';
 
 const DataTable = () => {
   const [modalShow, setModalShow] = useState(false);
   const [image, setImage] = useState('');
   const [fields, setFields] = useState(null);
-  const items = useSelector((state) => state.items);
-  const typeOfItems = useSelector((state) => state.typeOfItems);
+  const data = useSelector((state) => state.data);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    switch (typeOfItems) {
+    switch ('stores') {
       case 'stores':
         setFields(['name', 'logo']);
         break;
@@ -34,10 +33,10 @@ const DataTable = () => {
   }, []);
 
   console.log(fields);
-  console.log(items);
+  console.log(data);
 
   return (
-    items &&
+    data.items &&
     fields && (
       <>
         <Table striped bordered hover>
@@ -49,13 +48,13 @@ const DataTable = () => {
             </tr>
           </thead>
           <tbody>
-            {items.map((item) => {
+            {data.items.map((item) => {
               return (
                 <tr
                   key={item.uuid}
                   onClick={async () => {
-                    const response = await db.getById(item.uuid, typeOfItems);
-                    dispatch(setItems(response.data.items));
+                    const response = await db.getById(item.uuid, 'stores');
+                    dispatch(setData(response.data));
                   }}
                 >
                   {fields.map((field) => {

@@ -2,11 +2,12 @@ import { createStore } from 'redux';
 import { reducer } from './reducers/reducer';
 
 const state = {
-  items: [],
-  typeOfItems: 'stores',
-  currentPage: 1,
-  pageCount: 1,
-  itemCount: 0,
+  data: {},
+  // typeOfItems: 'stores',
+  // currentPage: 1,
+  // pageCount: 1,
+  // itemCount: 0,
+  // currentItemCount: 0,
 };
 
 const store = createStore(
