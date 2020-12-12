@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Table, Image } from 'react-bootstrap';
+import { BsTrash, BsPencil } from 'react-icons/bs';
 import ImageModal from './imageModal';
 import db from '../services/dataService';
 import { setData } from '../redux/actions';
@@ -35,7 +36,7 @@ const StoreTable = () => {
     <>
       {data.items && (
         <>
-          <Table striped bordered hover>
+          <Table striped bordered hover className="bg-white">
             <thead>
               <tr>
                 {fields.map((field) => (
@@ -57,23 +58,47 @@ const StoreTable = () => {
                     {fields.map((field) => {
                       if (['logo', 'image'].includes(field)) {
                         return (
-                          <td className="p-1 pl-3">
-                            <Image
-                              src={`http://localhost:5000/${item[field]}`}
-                              rounded
-                              style={{
-                                width: '50px',
-                                height: 'auto',
-                                cursor: 'pointer',
-                              }}
-                              onClick={() => {
-                                setModalShow(true);
-                                setImage(
-                                  `http://localhost:5000/${item[field]}`
-                                );
-                              }}
-                            />
-                          </td>
+                          <>
+                            <td className="p-1 pl-3">
+                              <Image
+                                src={`http://localhost:5000/${item[field]}`}
+                                rounded
+                                style={{
+                                  width: '50px',
+                                  height: 'auto',
+                                  cursor: 'pointer',
+                                }}
+                                onClick={() => {
+                                  setModalShow(true);
+                                  setImage(
+                                    `http://localhost:5000/${item[field]}`
+                                  );
+                                }}
+                              />
+                            </td>
+                            <td className="d-flex justify-content-center align-items-center">
+                              <div
+                                className="rounded-circle d-flex justify-content-center align-items-center"
+                                style={{
+                                  width: '27px',
+                                  height: '27px',
+                                  border: 'solid 1px black',
+                                }}
+                              >
+                                <BsPencil />
+                              </div>
+                              <div
+                                className="rounded-circle d-flex justify-content-center align-items-center"
+                                style={{
+                                  width: '27px',
+                                  height: '27px',
+                                  border: 'solid 1px red',
+                                }}
+                              >
+                                <BsTrash color="red" />
+                              </div>
+                            </td>
+                          </>
                         );
                       } else {
                         return <td>{item[field]}</td>;
