@@ -3,6 +3,7 @@ import { reducer } from './reducers';
 
 const state = {
   data: {},
+  previousId: null,
 };
 
 const store = createStore(

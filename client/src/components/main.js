@@ -16,14 +16,14 @@ const Main = () => {
         <Row>
           <Col>
             <Switch>
-              <Route path="/categories">
+              <Route path="/categories/:id">
                 <TableBreadCrumb table={'categories'} />
                 <TableControls table={'categories'} />
                 <DataTable table={'categories'} />
                 <TablePagination table={'categories'} />
               </Route>
 
-              <Route path="/products">
+              <Route path="/products/:id">
                 <TableBreadCrumb table={'products'} />
                 <TableControls table={'products'} />
                 <DataTable table={'products'} />

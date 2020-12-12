@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
 import ImageModal from './imageModal';
 import db from '../services/dataService';
-import { setData } from '../redux/actions';
+import { setData, setPreviousId } from '../redux/actions';
 import EditButtons from './editButtons';
 import ImageInTable from './image';
 import CreateItemModal from './modal';
@@ -87,10 +87,14 @@ const DataTable = ({ table }) => {
 
                       const response = await db.getById(item.uuid, table);
                       dispatch(setData(response.data));
-                      if (table === 'stores')
+                      if (table === 'stores') {
                         history.push(`/categories/${item.uuid}`);
-                      if (table === 'categories')
+                      }
+                      if (table === 'categories') {
                         history.push(`/products/${item.uuid}`);
+                      }
+
+                      dispatch(setPreviousId(item.id));
                     }}
                   >
                     {fields.map((field, i) => {
