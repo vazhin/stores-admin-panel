@@ -1,12 +1,8 @@
 import React from 'react';
-import {
-  ButtonToolbar,
-  Dropdown,
-  Button,
-  Form,
-  FormControl,
-} from 'react-bootstrap';
+import { ButtonToolbar, Button } from 'react-bootstrap';
 import CreateItemModal from './modal';
+import OrderByDropdown from './orderByDropdown';
+import SearchBox from './searchBox';
 
 const TableControls = ({ table }) => {
   const [modalShow, setModalShow] = React.useState(false);
@@ -17,21 +13,8 @@ const TableControls = ({ table }) => {
       aria-label="Toolbar with Button groups"
     >
       <div className="d-flex">
-        <Dropdown className="mr-3">
-          <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-            Order By
-          </Dropdown.Toggle>
-
-          <Dropdown.Menu>
-            <Dropdown.Item href="#">Name</Dropdown.Item>
-            <Dropdown.Item href="#">Date Created</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-
-        <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-primary">Search</Button>
-        </Form>
+        <OrderByDropdown />
+        <SearchBox />
       </div>
 
       <Button variant="primary" onClick={() => setModalShow(true)}>
