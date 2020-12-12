@@ -15,6 +15,19 @@ const CategoryTable = () => {
 
   const fields = ['name', 'logo'];
 
+  if (data.items && data.items.length === 0) {
+    console.log('yep');
+    return (
+      <div
+        className="d-flex flex-column justify-content-center"
+        style={{ height: '400px' }}
+      >
+        <h2>No Categories Yet!</h2>
+        <h2>Try adding one.</h2>
+      </div>
+    );
+  }
+
   return (
     <>
       {data.items && (

@@ -6,7 +6,7 @@ import ImageModal from './imageModal';
 import db from '../services/dataService';
 import { setData } from '../redux/actions';
 import EditButtons from './editButtons';
-import ImageInTable from './image';
+import ImageInTable from './imageInTable';
 
 const StoreTable = () => {
   const fields = ['name', 'logo', 'numOfCategories'];
@@ -33,6 +33,14 @@ const StoreTable = () => {
     }
   };
 
+  if (data.items && data.items.length === 0) {
+    return (
+      <div>
+        <h2>No Stores Yet!</h2>
+      </div>
+    );
+  }
+
   return (
     <>
       {data.items && (
@@ -40,9 +48,13 @@ const StoreTable = () => {
           <Table striped bordered hover className="bg-white">
             <thead>
               <tr>
-                {fields.map((field) => (
-                  <th>{field}</th>
-                ))}
+                {fields.map((field, i) =>
+                  field === 'numOfCategories' ? (
+                    <th key={i}>CATEGORIES</th>
+                  ) : (
+                    <th key={i}>{field.toUpperCase()}</th>
+                  )
+                )}
               </tr>
             </thead>
             <tbody>
@@ -56,23 +68,25 @@ const StoreTable = () => {
                       history.push('/categories');
                     }}
                   >
-                    {fields.map((field) => {
+                    {fields.map((field, i) => {
                       if (['logo', 'image'].includes(field)) {
                         return (
-                          <>
+                          <td className="p-1 pl-3" key={i}>
                             <ImageInTable
                               item={item}
                               field={field}
                               setImage={setImage}
                               setModalShow={setModalShow}
                             />
-                            <EditButtons />
-                          </>
+                          </td>
                         );
                       } else {
-                        return <td>{item[field]}</td>;
+                        return <td key={i}>{item[field]}</td>;
                       }
                     })}
+                    <td className="d-flex justify-content-center align-items-center">
+                      <EditButtons />
+                    </td>
                   </tr>
                 );
               })}
