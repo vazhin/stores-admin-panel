@@ -120,7 +120,7 @@ const DataTable = ({ table }) => {
                         return <td key={i}>{item[field]}</td>;
                       }
                     })}
-                    <td className="d-flex justify-content-center align-items-center">
+                    <td>
                       <EditButtons
                         setModalShow={setCreateModalShow}
                         setItemClicked={setItemClicked}

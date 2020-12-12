@@ -3,25 +3,25 @@ import { FaTrashAlt, FaPencilAlt } from 'react-icons/fa';
 
 const EditButtons = ({ setModalShow, setItemClicked }) => {
   return (
-    <>
-      <div
-        className="rounded-circle d-flex justify-content-center align-items-center bg-secondary"
+    <div className="d-flex justify-content-center align-items-center">
+      <span
+        className="rounded-circle d-inline-flex justify-content-center align-items-center bg-secondary"
         style={{
           width: '27px',
           height: '27px',
           cursor: 'pointer',
         }}
         onClick={(e) => {
-          setItemClicked(e.currentTarget.parentNode.parentNode.id);
+          setItemClicked(e.currentTarget.parentNode.parentNode.parentNode.id);
           setModalShow(true);
           e.cancelBubble = true;
           e.stopPropagation();
         }}
       >
         <FaPencilAlt color="white" />
-      </div>
-      <div
-        className="rounded-circle d-flex justify-content-center align-items-center bg-secondary ml-2"
+      </span>
+      <span
+        className="rounded-circle d-inline-flex justify-content-center align-items-center bg-secondary ml-2"
         style={{
           width: '27px',
           height: '27px',
@@ -33,8 +33,8 @@ const EditButtons = ({ setModalShow, setItemClicked }) => {
         }}
       >
         <FaTrashAlt color="white" />
-      </div>
-    </>
+      </span>
+    </div>
   );
 };
 
