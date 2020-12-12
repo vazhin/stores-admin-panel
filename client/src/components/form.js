@@ -4,11 +4,16 @@ import { useHistory } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import db from '../services/dataService';
 
-const CreateItemForm = ({ table }) => {
+const CreateItemForm = ({ table, mode, itemClicked }) => {
   const history = useHistory();
   const [validated, setValidated] = useState(false);
   const formData = new FormData();
   const previousId = useSelector((state) => state.previousId);
+  const data = useSelector((state) => state.data);
+
+  const itemClickedData = data.items.find(
+    (item) => item.id === parseInt(itemClicked)
+  );
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -38,7 +43,7 @@ const CreateItemForm = ({ table }) => {
     case 'products':
       formData.append('name', '');
       formData.append('price', '');
-      formData.append('quantity', 0);
+      formData.append('quantity', '');
       formData.append('image', '');
       formData.append('categoryId', previousId);
       break;
@@ -76,7 +81,7 @@ const CreateItemForm = ({ table }) => {
             ) : (
               <>
                 {['storeId', 'categoryId'].includes(field) ? (
-                  ''
+                  <p key={i} />
                 ) : (
                   <Form.Group key={i} controlId="validationCustom01">
                     <Form.Label>
@@ -89,7 +94,9 @@ const CreateItemForm = ({ table }) => {
                         field.charAt(0).toUpperCase() + field.slice(1)
                       }`}
                       onChange={(e) => formData.set(field, e.target.value)}
-                      // defaultValue="Mark"
+                      defaultValue={
+                        itemClickedData ? itemClickedData[field] : ''
+                      }
                     />
                     <Form.Control.Feedback type="invalid">
                       The {field} must not be empty

@@ -10,6 +10,7 @@ import ImageInTable from './image';
 import CreateItemModal from './modal';
 
 const DataTable = ({ table }) => {
+  const [itemClicked, setItemClicked] = useState(null);
   const [createModalShow, setCreateModalShow] = useState(false);
   const [imageModalShow, setImageModalShow] = useState(false);
   const [image, setImage] = useState('');
@@ -87,6 +88,7 @@ const DataTable = ({ table }) => {
                 return (
                   <tr
                     key={item.uuid}
+                    id={item.id}
                     onClick={async () => {
                       if (table === 'products') return;
 
@@ -119,7 +121,10 @@ const DataTable = ({ table }) => {
                       }
                     })}
                     <td className="d-flex justify-content-center align-items-center">
-                      <EditButtons setModalShow={setCreateModalShow} />
+                      <EditButtons
+                        setModalShow={setCreateModalShow}
+                        setItemClicked={setItemClicked}
+                      />
                     </td>
                   </tr>
                 );
@@ -136,6 +141,7 @@ const DataTable = ({ table }) => {
             show={createModalShow}
             onHide={() => setCreateModalShow(false)}
             table={table}
+            itemClicked={itemClicked}
             mode={'edit'}
           />
         </>

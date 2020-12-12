@@ -2,13 +2,11 @@ import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import CreateItemForm from './form';
 
-function CreateItemModal(props) {
-  console.log(props.table);
-  console.log(props.mode);
-
+function CreateItemModal({ show, onHide, table, itemClicked, mode }) {
   return (
     <Modal
-      {...props}
+      show={show}
+      onHide={onHide}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -16,14 +14,14 @@ function CreateItemModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          {props.mode.charAt(0).toUpperCase() + props.mode.slice(1)}
+          {mode.charAt(0).toUpperCase() + mode.slice(1)}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <CreateItemForm table={props.table} />
+        <CreateItemForm table={table} mode={mode} itemClicked={itemClicked} />
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button onClick={onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
   );

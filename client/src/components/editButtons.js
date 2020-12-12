@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaTrashAlt, FaPencilAlt } from 'react-icons/fa';
 
-const EditButtons = ({ setModalShow }) => {
+const EditButtons = ({ setModalShow, setItemClicked }) => {
   return (
     <>
       <div
@@ -12,6 +12,7 @@ const EditButtons = ({ setModalShow }) => {
           cursor: 'pointer',
         }}
         onClick={(e) => {
+          setItemClicked(e.currentTarget.parentNode.parentNode.id);
           setModalShow(true);
           e.cancelBubble = true;
           e.stopPropagation();
