@@ -21,7 +21,10 @@ const CreateItemForm = ({ table, mode, itemClicked }) => {
     if (form.checkValidity() === false) {
       event.stopPropagation();
     } else {
-      await db.create(formData, table);
+      if (mode === 'add') await db.create(formData, table);
+      if (mode === 'edit')
+        await db.update(itemClickedData.uuid, formData, table);
+
       history.go(0);
     }
 

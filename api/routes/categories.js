@@ -20,6 +20,6 @@ const upload = multer({ storage: storage });
 
 router.post('/', upload.single('image'), createCategory);
 router.get('/:categoryId', getProductsInCategory);
-router.put('/:categoryId', editCategory);
+router.put('/:categoryId', upload.single('image'), editCategory);
 
 module.exports = router;

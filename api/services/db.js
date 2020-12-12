@@ -1,3 +1,4 @@
+const fs = require('fs');
 class DatabaseService {
   async getAll(model, pageNum) {
     return new Promise(async (resolve, reject) => {
@@ -95,10 +96,19 @@ class DatabaseService {
     return new Promise(async (resolve, reject) => {
       try {
         const item = await model.findOne({ where: { uuid } });
+
+        const oldImage = item.image || item.logo;
+
         newData.forEach((field) => {
           item[field.key] = field.value;
         });
+
         await item.save();
+
+        fs.unlink(oldImage, (err) => {
+          if (err) console.log(err);
+          console.log(`${oldImage} was deleted`);
+        });
 
         resolve(item);
       } catch (err) {

@@ -22,6 +22,6 @@ const upload = multer({ storage: storage });
 router.post('/', upload.single('logo'), createStore);
 router.get('/', getStores);
 router.get('/:storeId', getCategoriesInStore);
-router.put('/:storeId', editStore);
+router.put('/:storeId', upload.single('logo'), editStore);
 
 module.exports = router;
