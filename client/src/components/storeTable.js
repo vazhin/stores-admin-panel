@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { Table, Image } from 'react-bootstrap';
 import ImageModal from './imageModal';
 import db from '../services/dataService';
@@ -11,6 +12,7 @@ const StoreTable = () => {
   const [image, setImage] = useState('');
   const data = useSelector((state) => state.data);
   const dispatch = useDispatch();
+  let history = useHistory();
 
   useEffect(() => {
     retrieveItems();
@@ -49,6 +51,7 @@ const StoreTable = () => {
                     onClick={async () => {
                       const response = await db.getById(item.uuid, 'stores');
                       dispatch(setData(response.data));
+                      history.push('/categories');
                     }}
                   >
                     {fields.map((field) => {
