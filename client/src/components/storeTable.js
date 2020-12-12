@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Table, Image } from 'react-bootstrap';
-import { BsTrash, BsPencil } from 'react-icons/bs';
+import { Table } from 'react-bootstrap';
 import ImageModal from './imageModal';
 import db from '../services/dataService';
 import { setData } from '../redux/actions';
+import EditButtons from './editButtons';
+import ImageInTable from './image';
 
 const StoreTable = () => {
-  const fields = ['name', 'logo'];
+  const fields = ['name', 'logo', 'numOfCategories'];
   const [modalShow, setModalShow] = useState(false);
   const [image, setImage] = useState('');
   const data = useSelector((state) => state.data);
@@ -59,45 +60,13 @@ const StoreTable = () => {
                       if (['logo', 'image'].includes(field)) {
                         return (
                           <>
-                            <td className="p-1 pl-3">
-                              <Image
-                                src={`http://localhost:5000/${item[field]}`}
-                                rounded
-                                style={{
-                                  width: '50px',
-                                  height: 'auto',
-                                  cursor: 'pointer',
-                                }}
-                                onClick={() => {
-                                  setModalShow(true);
-                                  setImage(
-                                    `http://localhost:5000/${item[field]}`
-                                  );
-                                }}
-                              />
-                            </td>
-                            <td className="d-flex justify-content-center align-items-center">
-                              <div
-                                className="rounded-circle d-flex justify-content-center align-items-center"
-                                style={{
-                                  width: '27px',
-                                  height: '27px',
-                                  border: 'solid 1px black',
-                                }}
-                              >
-                                <BsPencil />
-                              </div>
-                              <div
-                                className="rounded-circle d-flex justify-content-center align-items-center"
-                                style={{
-                                  width: '27px',
-                                  height: '27px',
-                                  border: 'solid 1px red',
-                                }}
-                              >
-                                <BsTrash color="red" />
-                              </div>
-                            </td>
+                            <ImageInTable
+                              item={item}
+                              field={field}
+                              setImage={setImage}
+                              setModalShow={setModalShow}
+                            />
+                            <EditButtons />
                           </>
                         );
                       } else {
