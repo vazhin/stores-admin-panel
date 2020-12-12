@@ -7,7 +7,7 @@ const ImageInTable = ({ item, setImage, setModalShow, field }) => {
       src={`http://localhost:5000/${item[field]}`}
       rounded
       style={{
-        width: '60px',
+        width: '58px',
         height: 'auto',
         cursor: 'pointer',
       }}
