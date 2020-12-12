@@ -33,20 +33,23 @@ const CreateItemForm = ({ table, mode, itemClicked }) => {
 
   switch (table) {
     case 'stores':
-      formData.append('name', '');
+      formData.append('name', mode === 'edit' ? itemClickedData.name : '');
       formData.append('logo', '');
       break;
 
     case 'categories':
-      formData.append('name', '');
+      formData.append('name', mode === 'edit' ? itemClickedData.name : '');
       formData.append('image', '');
       formData.append('storeId', previousId);
       break;
 
     case 'products':
-      formData.append('name', '');
-      formData.append('price', '');
-      formData.append('quantity', '');
+      formData.append('name', mode === 'edit' ? itemClickedData.name : '');
+      formData.append('price', mode === 'edit' ? itemClickedData.price : '');
+      formData.append(
+        'quantity',
+        mode === 'edit' ? itemClickedData.quantity : ''
+      );
       formData.append('image', '');
       formData.append('categoryId', previousId);
       break;
