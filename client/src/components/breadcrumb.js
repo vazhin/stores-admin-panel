@@ -12,7 +12,9 @@ const TableBreadCrumb = ({ table }) => {
 
       {table === 'categories' && (
         <>
-          <Breadcrumb.Item href="/stores">Stores</Breadcrumb.Item>
+          <Breadcrumb.Item active href="/stores">
+            Stores
+          </Breadcrumb.Item>
           <Breadcrumb.Item active href="/categories">
             Categories
           </Breadcrumb.Item>
@@ -21,8 +23,12 @@ const TableBreadCrumb = ({ table }) => {
 
       {table === 'products' && (
         <>
-          <Breadcrumb.Item href="/stores">Stores</Breadcrumb.Item>
-          <Breadcrumb.Item href="/categories">Categories</Breadcrumb.Item>
+          <Breadcrumb.Item active href="/stores">
+            Stores
+          </Breadcrumb.Item>
+          <Breadcrumb.Item active href="/categories">
+            Categories
+          </Breadcrumb.Item>
           <Breadcrumb.Item active href="/products">
             Products
           </Breadcrumb.Item>
