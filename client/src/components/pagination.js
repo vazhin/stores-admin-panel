@@ -1,9 +1,21 @@
 import React from 'react';
 import { ButtonToolbar, Pagination } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setData } from '../redux/actions';
+import db from '../services/dataService';
 
 const TablePagination = ({ table }) => {
   const data = useSelector((state) => state.data);
+  const dispatch = useDispatch();
+
+  const retrieveItems = async (table, pageNum) => {
+    try {
+      const response = await db.getAll(table, pageNum);
+      dispatch(setData(response.data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -16,25 +28,41 @@ const TablePagination = ({ table }) => {
             Page {data.pageNum} of {data.pageCount}
           </h6>
           <Pagination>
-            {data.pageNum >= 4 && (
+            {data.pageNum - 2 >= 1 && (
               <>
-                <Pagination.Item>{1}</Pagination.Item>
+                <Pagination.Item onClick={() => retrieveItems(table, 1)}>
+                  {1}
+                </Pagination.Item>
                 <Pagination.Ellipsis disabled />
               </>
             )}
 
-            {data.pageNum !== 1 && (
-              <Pagination.Item>{data.pageNum - 1}</Pagination.Item>
+            {data.pageNum > 1 && (
+              <Pagination.Item
+                onClick={() => retrieveItems(table, data.pageNum - 1)}
+              >
+                {data.pageNum - 1}
+              </Pagination.Item>
             )}
             <Pagination.Item active>{data.pageNum}</Pagination.Item>
             {data.pageCount > data.pageNum && (
-              <Pagination.Item>{data.pageNum + 1}</Pagination.Item>
+              <Pagination.Item
+                onClick={() => retrieveItems(table, data.pageNum + 1)}
+              >
+                {data.pageNum + 1}
+              </Pagination.Item>
             )}
 
-            {data.pageNum + 2 !== data.pageCount && (
-              <Pagination.Ellipsis disabled />
+            {data.pageNum + 2 <= data.pageCount && (
+              <>
+                <Pagination.Ellipsis disabled />
+                <Pagination.Item
+                  onClick={() => retrieveItems(table, data.pageCount)}
+                >
+                  {data.pageCount}
+                </Pagination.Item>
+              </>
             )}
-            <Pagination.Item>{data.pageCount}</Pagination.Item>
           </Pagination>
         </ButtonToolbar>
       )}
