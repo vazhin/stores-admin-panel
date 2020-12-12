@@ -5,3 +5,7 @@ body {
   font-family: 'Roboto', sans-serif !important;
   background-color: gainsboro;
 }
+
+td {
+  cursor: pointer;
+}

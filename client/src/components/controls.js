@@ -6,8 +6,11 @@ import {
   Form,
   FormControl,
 } from 'react-bootstrap';
+import CreateItemModal from './modal';
 
 const TableControls = ({ table }) => {
+  const [modalShow, setModalShow] = React.useState(false);
+
   return (
     <ButtonToolbar
       className="justify-content-between mb-3"
@@ -32,7 +35,11 @@ const TableControls = ({ table }) => {
         </Form>
       </div>
 
-      <Button variant="primary"> + Add Item</Button>
+      <Button variant="primary" onClick={() => setModalShow(true)}>
+        + Add Item
+      </Button>
+
+      <CreateItemModal show={modalShow} onHide={() => setModalShow(false)} />
     </ButtonToolbar>
   );
 };
