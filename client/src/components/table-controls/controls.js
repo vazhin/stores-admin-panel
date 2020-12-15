@@ -1,6 +1,6 @@
 import React from 'react';
 import { ButtonToolbar, Button } from 'react-bootstrap';
-import CreateItemModal from './modal';
+import CreateItemModal from '../modals/modal';
 import OrderByDropdown from './orderByDropdown';
 import SearchBox from './searchBox';
 

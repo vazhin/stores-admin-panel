@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import CreateItemForm from './form';
+import CreateItemForm from '../forms/form';
 
 function CreateItemModal({ show, onHide, table, itemClicked, mode }) {
   return (

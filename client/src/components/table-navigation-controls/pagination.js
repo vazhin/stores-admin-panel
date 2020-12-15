@@ -1,8 +1,8 @@
 import React from 'react';
 import { ButtonToolbar, Pagination } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { setData } from '../redux/actions';
-import db from '../services/dataService';
+import { setData } from '../../redux/actions';
+import db from '../../services/dataService';
 
 const TablePagination = ({ table }) => {
   const data = useSelector((state) => state.data);

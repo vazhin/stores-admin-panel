@@ -1,10 +1,10 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Switch, Route } from 'react-router-dom';
-import DataTable from './table';
-import TableControls from './controls';
-import TableBreadCrumb from './breadcrumb';
-import TablePagination from './pagination';
+import DataTable from './tables/table';
+import TableControls from './table-controls/controls';
+import TableBreadCrumb from './table-navigation-controls/breadcrumb';
+import TablePagination from './table-navigation-controls/pagination';
 
 const Main = () => {
   return (

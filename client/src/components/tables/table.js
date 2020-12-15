@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
-import ImageModal from './imageModal';
-import db from '../services/dataService';
-import { setData, setPreviousId } from '../redux/actions';
-import EditButtons from './editButtons';
-import ImageInTable from './image';
-import CreateItemModal from './modal';
+import ImageModal from '../modals/imageModal';
+import db from '../../services/dataService';
+import { setData, setPreviousId } from '../../redux/actions';
+import EditButtons from '../table-controls/editButtons';
+import ImageInTable from '../modals/image';
+import CreateItemModal from '../modals/modal';
 
 const DataTable = ({ table }) => {
   const [itemClicked, setItemClicked] = useState(null);

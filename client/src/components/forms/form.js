@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
-import db from '../services/dataService';
+import db from '../../services/dataService';
 
 const CreateItemForm = ({ table, mode, itemClicked }) => {
   const history = useHistory();
