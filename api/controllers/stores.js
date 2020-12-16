@@ -56,3 +56,14 @@ exports.getCategoriesInStore = async (req, res, next) => {
     res.status(500).json(err);
   }
 };
+
+exports.getOneStore = async (req, res, next) => {
+  const storeId = req.params.storeId;
+  try {
+    const store = await db.getById(storeId, Store);
+    res.status(200).json(store);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+};

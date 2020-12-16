@@ -4,6 +4,7 @@ const multer = require('multer');
 const {
   editStore,
   getStores,
+  getOneStore,
   createStore,
   getCategoriesInStore,
 } = require('../controllers/stores');
@@ -22,6 +23,7 @@ const upload = multer({ storage: storage });
 router.post('/', upload.single('logo'), createStore);
 router.get('/', getStores);
 router.get('/:storeId', getCategoriesInStore);
+router.get('/single/:storeId', getOneStore);
 router.put('/:storeId', upload.single('logo'), editStore);
 
 module.exports = router;

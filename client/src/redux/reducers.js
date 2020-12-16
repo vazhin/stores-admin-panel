@@ -1,4 +1,4 @@
-import { SET_DATA, SET_PREVIOUS_ID } from './actionTypes';
+import { SET_DATA, SET_PREVIOUS_ID, SET_PAGE } from './actionTypes';
 
 export const reducer = (state, action) => {
   switch (action.type) {
@@ -6,6 +6,8 @@ export const reducer = (state, action) => {
       return { ...state, data: action.payload.data };
     case SET_PREVIOUS_ID:
       return { ...state, previousId: action.payload.previousId };
+    case SET_PAGE:
+      return { ...state, page: action.payload.page };
     default:
       return state;
   }

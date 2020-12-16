@@ -1,10 +1,9 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Switch, Route } from 'react-router-dom';
-import DataTable from './tables/table';
-import TableControls from './table-controls/controls';
-import TableBreadCrumb from './table-navigation-controls/breadcrumb';
-import TablePagination from './table-navigation-controls/pagination';
+import ProductsPage from './pages/products';
+import CategoriesPage from './pages/categories';
+import StoresPage from './pages/stores';
 
 const Main = () => {
   return (
@@ -16,26 +15,9 @@ const Main = () => {
         <Row>
           <Col>
             <Switch>
-              <Route path="/categories/:id">
-                <TableBreadCrumb table={'categories'} />
-                <TableControls table={'categories'} />
-                <DataTable table={'categories'} />
-                <TablePagination table={'categories'} />
-              </Route>
-
-              <Route path="/products/:id">
-                <TableBreadCrumb table={'products'} />
-                <TableControls table={'products'} />
-                <DataTable table={'products'} />
-                <TablePagination table={'products'} />
-              </Route>
-
-              <Route path="/">
-                <TableBreadCrumb table={'stores'} />
-                <TableControls table={'stores'} />
-                <DataTable table={'stores'} />
-                <TablePagination table={'stores'} />
-              </Route>
+              <Route path="/categories/:storeId" component={CategoriesPage} />
+              <Route path="/products/:categoryId" component={ProductsPage} />
+              <Route path="/" component={StoresPage} />
             </Switch>
           </Col>
         </Row>

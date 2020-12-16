@@ -1,19 +1,21 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Breadcrumb } from 'react-bootstrap';
 
-const TableBreadCrumb = ({ table }) => {
+const TableBreadCrumb = () => {
   let history = useHistory();
+  const page = useSelector((state) => state.page);
 
   return (
     <Breadcrumb>
-      {table === 'stores' && (
+      {page === 'stores' && (
         <Breadcrumb.Item active href="/stores">
           Stores
         </Breadcrumb.Item>
       )}
 
-      {table === 'categories' && (
+      {page === 'categories' && (
         <>
           <Breadcrumb.Item
             href="/stores"
@@ -27,7 +29,7 @@ const TableBreadCrumb = ({ table }) => {
         </>
       )}
 
-      {table === 'products' && (
+      {page === 'products' && (
         <>
           <Breadcrumb.Item
             href="/stores"

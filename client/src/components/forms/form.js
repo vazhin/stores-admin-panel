@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import db from '../../services/dataService';
 
-const CreateItemForm = ({ table, mode, itemClicked }) => {
+const CreateItemForm = ({ mode, itemClicked }) => {
   const history = useHistory();
+
+  const location = useLocation();
+  const page = location.pathname.split('/')[1];
+
   const [validated, setValidated] = useState(false);
   const formData = new FormData();
   const previousId = useSelector((state) => state.previousId);
@@ -21,9 +25,9 @@ const CreateItemForm = ({ table, mode, itemClicked }) => {
     if (form.checkValidity() === false) {
       event.stopPropagation();
     } else {
-      if (mode === 'add') await db.create(formData, table);
+      if (mode === 'add') await db.create(formData, page);
       if (mode === 'edit')
-        await db.update(itemClickedData.uuid, formData, table);
+        await db.update(itemClickedData.uuid, formData, page);
 
       history.go(0);
     }
@@ -31,7 +35,7 @@ const CreateItemForm = ({ table, mode, itemClicked }) => {
     setValidated(true);
   };
 
-  switch (table) {
+  switch (page) {
     case 'stores':
       formData.append('name', mode === 'edit' ? itemClickedData.name : '');
       formData.append('logo', '');

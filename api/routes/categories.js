@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const {
+  getCategory,
   editCategory,
   createCategory,
   getProductsInCategory,
@@ -20,6 +21,7 @@ const upload = multer({ storage: storage });
 
 router.post('/', upload.single('image'), createCategory);
 router.get('/:categoryId', getProductsInCategory);
+router.get('/single/:categoryId', getCategory);
 router.put('/:categoryId', upload.single('image'), editCategory);
 
 module.exports = router;

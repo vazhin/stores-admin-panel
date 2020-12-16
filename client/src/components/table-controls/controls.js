@@ -4,7 +4,7 @@ import CreateItemModal from '../modals/modal';
 import OrderByDropdown from './orderByDropdown';
 import SearchBox from './searchBox';
 
-const TableControls = ({ table }) => {
+const TableControls = () => {
   const [modalShow, setModalShow] = React.useState(false);
 
   return (
@@ -24,7 +24,6 @@ const TableControls = ({ table }) => {
       <CreateItemModal
         show={modalShow}
         onHide={() => setModalShow(false)}
-        table={table}
         mode={'add'}
       />
     </ButtonToolbar>

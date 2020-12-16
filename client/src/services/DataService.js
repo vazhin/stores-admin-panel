@@ -5,8 +5,12 @@ class DataService {
     return http.get(`/${items}${page ? `?page=${page}` : ''}`);
   }
 
-  getById(id, items, page) {
-    return http.get(`/${items}/${id}`);
+  getAllById(id, items, page) {
+    return http.get(`/${items}/${id}${page ? `?page=${page}` : ''}`);
+  }
+
+  getById(uuid, items) {
+    return http.get(`/${items}/single/${uuid}`);
   }
 
   create(data, items) {

@@ -4,6 +4,7 @@ import { reducer } from './reducers';
 const state = {
   data: {},
   previousId: null,
+  page: 'stores',
 };
 
 const store = createStore(

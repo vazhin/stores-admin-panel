@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import CreateItemForm from '../forms/form';
 
-function CreateItemModal({ show, onHide, table, itemClicked, mode }) {
+function CreateItemModal({ show, onHide, itemClicked, mode }) {
   return (
     <Modal
       show={show}
@@ -18,7 +18,7 @@ function CreateItemModal({ show, onHide, table, itemClicked, mode }) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <CreateItemForm table={table} mode={mode} itemClicked={itemClicked} />
+        <CreateItemForm mode={mode} itemClicked={itemClicked} />
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={onHide}>Close</Button>

@@ -1,26 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
 import ImageModal from '../modals/imageModal';
-import db from '../../services/dataService';
-import { setData, setPreviousId } from '../../redux/actions';
 import EditButtons from '../table-controls/editButtons';
 import ImageInTable from '../modals/image';
 import CreateItemModal from '../modals/modal';
 
-const DataTable = ({ table }) => {
+const DataTable = () => {
   const [itemClicked, setItemClicked] = useState(null);
   const [createModalShow, setCreateModalShow] = useState(false);
   const [imageModalShow, setImageModalShow] = useState(false);
   const [image, setImage] = useState('');
   const data = useSelector((state) => state.data);
-  const dispatch = useDispatch();
+  const page = useSelector((state) => state.page);
   let history = useHistory();
 
   const fields = [];
 
-  switch (table) {
+  switch (page) {
     case 'stores':
       fields.push('name', 'numOfCategories', 'logo');
       break;
@@ -34,32 +32,13 @@ const DataTable = ({ table }) => {
       break;
   }
 
-  useEffect(() => {
-    if (table === 'stores') {
-      retrieveItems();
-    } else {
-      history.push('/stores');
-      history.go(0);
-    }
-    // eslint-disable-next-line
-  }, []);
-
-  const retrieveItems = async () => {
-    try {
-      const response = await db.getAll(table, data.pageNum ? data.pageNum : 1);
-      dispatch(setData(response.data));
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   if (data.items && data.items.length === 0) {
     return (
       <div
         className="d-flex flex-column justify-content-center"
         style={{ height: '400px' }}
       >
-        <h2>No {table.charAt(0).toUpperCase() + table.slice(1)} Yet!</h2>
+        <h2>No {page.charAt(0).toUpperCase() + page.slice(1)} Yet!</h2>
         <h2>Try adding one.</h2>
       </div>
     );
@@ -96,18 +75,14 @@ const DataTable = ({ table }) => {
                     key={item.uuid}
                     id={item.id}
                     onClick={async () => {
-                      if (table === 'products') return;
+                      if (page === 'products') return;
 
-                      const response = await db.getById(item.uuid, table);
-                      dispatch(setData(response.data));
-                      if (table === 'stores') {
+                      if (page === 'stores') {
                         history.push(`/categories/${item.uuid}`);
                       }
-                      if (table === 'categories') {
+                      if (page === 'categories') {
                         history.push(`/products/${item.uuid}`);
                       }
-
-                      dispatch(setPreviousId(item.id));
                     }}
                   >
                     {fields.map((field, i) => {
@@ -146,7 +121,6 @@ const DataTable = ({ table }) => {
           <CreateItemModal
             show={createModalShow}
             onHide={() => setCreateModalShow(false)}
-            table={table}
             itemClicked={itemClicked}
             mode={'edit'}
           />
