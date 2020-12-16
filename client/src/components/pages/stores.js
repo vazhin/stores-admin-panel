@@ -9,7 +9,6 @@ import db from '../../services/dataService';
 
 const StoresProducts = () => {
   const dispatch = useDispatch();
-  dispatch(setPage('stores'));
   const data = useSelector((state) => state.data);
 
   useEffect(() => {
@@ -25,6 +24,7 @@ const StoresProducts = () => {
         data.pageNum ? data.pageNum : 1
       );
       dispatch(setData(response.data));
+      dispatch(setPage('stores'));
     } catch (err) {
       console.log(err);
     }

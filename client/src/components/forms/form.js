@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import db from '../../services/dataService';
 
 const CreateItemForm = ({ mode, itemClicked }) => {
   const history = useHistory();
 
-  const location = useLocation();
-  const page = location.pathname.split('/')[1];
-
   const [validated, setValidated] = useState(false);
   const formData = new FormData();
   const previousId = useSelector((state) => state.previousId);
   const data = useSelector((state) => state.data);
+  const page = useSelector((state) => state.page);
 
   const itemClickedData = data.items.find(
     (item) => item.id === parseInt(itemClicked)

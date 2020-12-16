@@ -10,7 +10,6 @@ import { useParams } from 'react-router-dom';
 
 const CategoriesPage = () => {
   const dispatch = useDispatch();
-  dispatch(setPage('categories'));
   const data = useSelector((state) => state.data);
   const { storeId } = useParams();
 
@@ -30,6 +29,7 @@ const CategoriesPage = () => {
       );
       dispatch(setPreviousId(store.data.id));
       dispatch(setData(response.data));
+      dispatch(setPage('categories'));
     } catch (err) {
       console.log(err);
     }
