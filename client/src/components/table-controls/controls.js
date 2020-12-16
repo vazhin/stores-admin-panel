@@ -30,4 +30,4 @@ const TableControls = () => {
   );
 };
 
-export default TableControls;
+export default React.memo(TableControls);

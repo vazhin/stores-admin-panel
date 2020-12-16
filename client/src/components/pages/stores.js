@@ -40,4 +40,4 @@ const StoresProducts = () => {
   );
 };
 
-export default StoresProducts;
+export default React.memo(StoresProducts);

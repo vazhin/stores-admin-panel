@@ -9,35 +9,23 @@ const TableBreadCrumb = () => {
 
   return (
     <Breadcrumb>
-      {page === 'stores' && (
-        <Breadcrumb.Item active href="/stores">
-          Stores
-        </Breadcrumb.Item>
-      )}
+      {page === 'stores' && <Breadcrumb.Item active>Stores</Breadcrumb.Item>}
 
       {page === 'categories' && (
         <>
-          <Breadcrumb.Item
-            href="/stores"
-            onClick={() => history.push('/stores')}
-          >
+          <Breadcrumb.Item onClick={() => history.goBack()}>
             Stores
           </Breadcrumb.Item>
-          <Breadcrumb.Item active href="/categories">
-            Categories
-          </Breadcrumb.Item>
+          <Breadcrumb.Item active>Categories</Breadcrumb.Item>
         </>
       )}
 
       {page === 'products' && (
         <>
-          <Breadcrumb.Item
-            href="/stores"
-            onClick={() => history.push('/stores')}
-          >
+          <Breadcrumb.Item onClick={() => history.push('/')}>
             Stores
           </Breadcrumb.Item>
-          <Breadcrumb.Item active href="/categories">
+          <Breadcrumb.Item onClick={() => history.goBack()}>
             Categories
           </Breadcrumb.Item>
           <Breadcrumb.Item active href="/products">
@@ -49,4 +37,4 @@ const TableBreadCrumb = () => {
   );
 };
 
-export default TableBreadCrumb;
+export default React.memo(TableBreadCrumb);

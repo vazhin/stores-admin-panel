@@ -45,4 +45,4 @@ const CategoriesPage = () => {
   );
 };
 
-export default CategoriesPage;
+export default React.memo(CategoriesPage);
